@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harsh Yadav — Full Stack Developer &amp; CSE Undergraduate</title>
+<meta name="description" content="Portfolio of Harsh Yadav, a B.Tech CSE undergraduate and full-stack developer building with React, Node.js, and MongoDB.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F5F1;
+    --paper-2:#EFEEE9;
+    --ink:#1B1F3B;
+    --ink-soft:#3A3F5C;
+    --accent:#2D5FE0;
+    --accent-soft:#E7ECFC;
+    --muted:#666B82;
+    --line:#D9DCE6;
+    --line-strong:#B9BFD1;
+    --max:760px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;}
+  a:hover{border-bottom-color:var(--accent);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(246,245,241,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; max-width:var(--max); margin:0 auto;
+  }
+  .nav-name{font-weight:700; font-size:15px; letter-spacing:0.01em;}
+  .nav-links{display:flex; gap:22px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink-soft);}
+  .nav-links a{color:var(--ink-soft); border-bottom:1px solid transparent;}
+  .nav-links a:hover{color:var(--accent); border-bottom-color:var(--accent);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:72px 0 56px;
+    background-image:
+      radial-gradient(circle, rgba(45,95,224,0.16) 1px, transparent 1.4px);
+    background-size:22px 22px;
+    background-position:-6px -6px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  .hero h1{
+    font-size:clamp(34px, 6vw, 52px);
+    line-height:1.05;
+    margin:0 0 10px;
+    font-weight:800;
+    letter-spacing:-0.01em;
+  }
+  .hero .role{
+    font-size:19px;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+    max-width:520px;
+  }
+  .prompt{
+    display:inline-flex; align-items:center; gap:2px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:9px 12px;
+    border-radius:3px;
+    border:1px solid #CFDAF9;
+  }
+  .cursor{
+    display:inline-block; width:7px; height:14px; background:var(--accent);
+    margin-left:2px; animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{opacity:0;} }
+  @media (prefers-reduced-motion: reduce){ .cursor{animation:none;} }
+
+  .stats{
+    display:flex; gap:0; margin-top:36px; border-top:1px solid var(--line-strong);
+  }
+  .stat{
+    flex:1; padding:14px 18px 0; border-left:1px solid var(--line-strong);
+  }
+  .stat:first-child{border-left:none; padding-left:0;}
+  .stat .label{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); display:block; margin-bottom:4px;}
+  .stat .value{font-weight:700; font-size:15px;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:52px 0;}
+  section + section{border-top:1px solid var(--line);}
+  h2.section-title{
+    font-size:22px; font-weight:800; margin:0 0 26px;
+    display:flex; align-items:baseline; gap:10px;
+  }
+  h2.section-title .idx{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted); font-weight:500;
+  }
+
+  .about p{max-width:640px; color:var(--ink-soft); font-size:16px;}
+
+  /* Skills — tag clusters */
+  .skill-block{padding:16px 0; border-top:1px solid var(--line);}
+  .skill-block:last-child{border-bottom:1px solid var(--line);}
+  .skill-block .k{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);
+    margin-bottom:10px;
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-size:14px; color:var(--ink-soft);
+    padding:5px 12px;
+    border:1px solid var(--line-strong);
+    border-radius:3px;
+    background:var(--paper-2);
+  }
+
+  /* Projects */
+  .project{padding:26px 0; border-top:1px solid var(--line);}
+  .project:first-child{border-top:none; padding-top:0;}
+  .project-head{
+    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;
+    margin-bottom:6px;
+  }
+  .project-head h3{font-size:19px; margin:0; font-weight:700;}
+  .kind-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent);
+    background:var(--accent-soft); border:1px solid #CFDAF9;
+    padding:2px 9px; border-radius:20px; margin-left:10px; vertical-align:middle;
+  }
+  .project-date{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);}
+  .project-stack{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--accent);
+    margin:0 0 12px;
+  }
+  .project p.desc{color:var(--ink-soft); margin:0 0 12px; max-width:600px;}
+  .project ul{margin:0 0 14px; padding-left:18px; color:var(--ink-soft);}
+  .project ul li{margin-bottom:5px;}
+  .project-links{display:flex; gap:18px; font-size:14px; font-weight:600;}
+
+  .more-projects{margin-top:8px; padding-top:20px; border-top:1px dashed var(--line);}
+  .more-projects .more-label{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); margin-bottom:12px;}
+  .mini-row{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px; margin-bottom:6px;}
+  .mini-row .mname{font-weight:700; font-size:15px;}
+  .mini-row .mstack{color:var(--muted); font-size:13px;}
+
+  /* Experience */
+  .exp-item{padding:8px 0;}
+  .exp-head{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:4px;}
+  .exp-head h3{font-size:18px; margin:0; font-weight:700;}
+  .exp-date{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);}
+  .exp-org{color:var(--accent); font-size:14px; display:block; margin-bottom:10px;}
+  .exp-item p{color:var(--ink-soft); max-width:620px; margin:0;}
+
+  /* Certifications */
+  .cert-row{
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    padding:12px 0; border-top:1px solid var(--line); font-size:14.5px;
+  }
+  .cert-row:last-child{border-bottom:1px solid var(--line);}
+  .cert-row .name{font-weight:600;}
+  .cert-row .issuer{color:var(--muted);}
+  .cert-row .issuer a{color:var(--muted); border-bottom:1px dotted var(--muted);}
+  .cert-row .right{text-align:right;}
+  .cert-row .date{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--muted); white-space:nowrap;}
+  .cert-row .cert-link{font-size:12.5px; display:block; margin-top:2px;}
+
+  /* Education */
+  .edu-row{padding:14px 0; border-top:1px solid var(--line);}
+  .edu-row:last-child{border-bottom:1px solid var(--line);}
+  .edu-top{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+  .edu-top .school{font-weight:700;}
+  .edu-top .loc{color:var(--muted); font-size:13.5px; text-align:right;}
+  .edu-bottom{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--ink-soft); font-size:14.5px; margin-top:2px;}
+  .edu-bottom .when{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--muted);}
+
+  /* Contact / footer */
+  footer{
+    padding:48px 0 60px;
+    border-top:1px solid var(--line);
+  }
+  footer h2.section-title{margin-bottom:14px;}
+  footer .lead{color:var(--ink-soft); max-width:520px; margin:0 0 26px;}
+  .contact-grid{display:flex; flex-wrap:wrap; gap:28px 40px;}
+  .contact-item .label{display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-bottom:4px;}
+  .contact-item .val{font-weight:600; font-size:15px;}
+  .foot-note{margin-top:40px; font-size:12.5px; color:var(--muted);}
+
+  @media (max-width:600px){
+    .nav-inner{flex-direction:column; align-items:flex-start; gap:8px; padding:14px 24px;}
+    .nav-links{gap:14px; font-size:12px; flex-wrap:wrap;}
+    .stats{flex-direction:column;}
+    .stat{border-left:none; border-top:1px solid var(--line-strong); padding:12px 0 0;}
+    .stat:first-child{border-top:none;}
+    .cert-row{flex-direction:column; gap:2px;}
+    .cert-row .right{text-align:left;}
+    .cert-row .date{order:-1;}
+    .kind-tag{display:inline-block; margin:6px 0 0; margin-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-name">Harsh Yadav</div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Harsh Yadav</h1>
+    <p class="role">B.Tech CSE undergraduate building full-stack web apps end to end — React on the frontend, Node.js and MongoDB on the backend.</p>
+    <span class="prompt">shipping full-stack features, end to end<span class="cursor"></span></span>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="label">Degree</span>
+        <span class="value">B.Tech, CSE — LPU</span>
+      </div>
+      <div class="stat">
+        <span class="label">CGPA</span>
+        <span class="value">7.06</span>
+      </div>
+      <div class="stat">
+        <span class="label">Looking for</span>
+        <span class="value">Full-stack internships</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section id="about" class="about">
+    <h2 class="section-title">About</h2>
+    <p>I'm a Computer Science undergraduate at Lovely Professional University, working through
+    data structures and algorithms while building real, working software alongside it. Most of
+    my projects run the full stack — a React frontend talking to a Node/Express API, backed by
+    MongoDB — but I've also built a desktop app in Java and a systems-monitoring tool in Python,
+    so I'm just as comfortable in the terminal as I am in the browser. Outside of coursework,
+    I spent a summer training community members in an internship on staying safe online, which
+    taught me a lot about explaining technical ideas to people who aren't technical.</p>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+
+    <div class="skill-block">
+      <div class="k">Languages</div>
+      <div class="chips">
+        <span class="chip">JavaScript (ES6+)</span><span class="chip">C++</span>
+        <span class="chip">C#</span><span class="chip">Python</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="k">Frontend</div>
+      <div class="chips">
+        <span class="chip">React.js</span><span class="chip">Next.js</span>
+        <span class="chip">HTML5 &amp; CSS3</span><span class="chip">Tailwind CSS</span>
+        <span class="chip">Responsive Design</span><span class="chip">Flexbox / Grid</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="k">Backend</div>
+      <div class="chips">
+        <span class="chip">Node.js</span><span class="chip">Express.js</span>
+        <span class="chip">MongoDB</span><span class="chip">RESTful APIs</span>
+        <span class="chip">.NET</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="k">Tools &amp; platforms</div>
+      <div class="chips">
+        <span class="chip">Git &amp; GitHub</span><span class="chip">Vite</span><span class="chip">VS Code</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="k">CS fundamentals</div>
+      <div class="chips">
+        <span class="chip">Data Structures &amp; Algorithms</span><span class="chip">Object-Oriented Programming</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="k">Working style</div>
+      <div class="chips">
+        <span class="chip">Problem-solving</span><span class="chip">Cross-functional collaboration</span>
+        <span class="chip">Adaptability</span><span class="chip">Code reviews</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Task Arena<span class="kind-tag">full-stack</span></h3>
+        <span class="project-date">May 2026</span>
+      </div>
+      <p class="project-stack">React.js · Vite · Tailwind CSS · Node.js · Express.js · MongoDB</p>
+      <p class="desc">A gamified educational platform built to improve student engagement and
+      long-term learning retention through interactive challenges and progress tracking. The
+      frontend is a separate React.js app talking to an MVC-based Node/Express API, with
+      MongoDB and Mongoose handling storage and JWT keeping sessions secure. On the UI side,
+      I focused on making it feel responsive and consistent everywhere — Tailwind CSS,
+      Flexbox/Grid, and a fair amount of cross-browser testing.</p>
+      <div class="project-links">
+        <a href="https://github.com/MrHarsh-tech/TaskArena" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="https://taskarena-do2h.onrender.com/" target="_blank" rel="noopener">Live demo</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Smart Parking Management System<span class="kind-tag">desktop app</span></h3>
+        <span class="project-date">Jul 2026</span>
+      </div>
+      <p class="project-stack">Java · Data Structures</p>
+      <p class="desc">A standalone desktop application for managing parking spaces, vehicle
+      records, and reservations. Under the hood it leans on four core data structures —
+      arrays, queues, hash maps, and linked lists — for slot allocation, waiting-queue
+      handling, vehicle search, and history tracking, consolidating what used to be manual
+      tracking into one system for on-site staff.</p>
+      <div class="project-links">
+        <a href="https://github.com/MrHarsh-tech/Smart-Parking-Management-System" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Real-Time System Monitoring Dashboard<span class="kind-tag">systems tool</span></h3>
+        <span class="project-date">Dec 2025</span>
+      </div>
+      <p class="project-stack">Python · psutil · Matplotlib</p>
+      <p class="desc">A real-time dashboard that tracks five core system metrics — CPU, memory,
+      disk usage, network traffic, and process count — with threshold-based alerts for
+      conditions that need attention. It's built to be used continuously, with pause/resume
+      controls, adjustable update intervals, and toggleable network views.</p>
+      <div class="project-links">
+        <a href="https://github.com/MrHarsh-tech/Real-time-system-monitoring-dashboard" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="more-projects">
+      <div class="more-label">More on GitHub</div>
+      <div class="mini-row">
+        <span class="mname">Modern AutoMobiles</span>
+        <span class="mstack">HTML · CSS · JavaScript — a vehicle showcase site</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/MrHarsh-tech" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="experience">
+    <h2 class="section-title">Experience</h2>
+    <div class="exp-item">
+      <div class="exp-head">
+        <h3>CyberSmart Awareness CSR — Internship</h3>
+        <span class="exp-date">Jul 2025 – Aug 2025</span>
+      </div>
+      <span class="exp-org">WNS Cares Foundation</span>
+      <p>Trained 40 community members across five WNS Cybersmart modules — social media
+      safety, cyberbullying, financial security, public internet safety, and cyber grooming —
+      through in-person sessions with live Q&amp;A and hands-on demos of password security,
+      two-factor authentication, and phishing detection. Outcomes were documented through
+      geo-tagged field photos and an Excel-based certification log for CSR reporting.</p>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <h2 class="section-title">Certifications</h2>
+
+    <div class="cert-row">
+      <div>
+        <div class="name">Data Structures Fundamentals: Basics to Applications</div>
+        <div class="issuer">Certificate of Merit, Grade A — <a href="https://www.lpu.in/skilldevelopment/" target="_blank" rel="noopener">Lovely Professional University</a></div>
+      </div>
+      <div class="right">
+        <div class="date">Jul 2026</div>
+        <a class="cert-link" href="https://drive.google.com/file/d/1n4EEzKniA0Xp9iUdvaWaa07a_RZWmwY4/view?usp=sharing" target="_blank" rel="noopener">View certificate</a>
+      </div>
+    </div>
+    <div class="cert-row">
+      <div>
+        <div class="name">Database Management System – Part 1</div>
+        <div class="issuer"><a href="https://infyspringboard.onwingspan.com/web/en/login" target="_blank" rel="noopener">Infosys Springboard</a></div>
+      </div>
+      <div class="right">
+        <div class="date">Jul 2026</div>
+        <a class="cert-link" href="https://drive.google.com/file/d/1jp-HQObYQ9GBl4G_x8fHGJxAjkkNm2ws/view?usp=sharing" target="_blank" rel="noopener">View certificate</a>
+      </div>
+    </div>
+    <div class="cert-row">
+      <div>
+        <div class="name">Gen AI — NASSCOM</div>
+        <div class="issuer"><a href="https://www.sfjbs.com/" target="_blank" rel="noopener">Skill Development Program</a></div>
+      </div>
+      <div class="right">
+        <div class="date">May 2026</div>
+        <a class="cert-link" href="https://drive.google.com/file/d/18uMShSKF6gZ7o1etLVlnDnB6ibTXA-Bs/view?usp=sharing" target="_blank" rel="noopener">View certificate</a>
+      </div>
+    </div>
+    <div class="cert-row">
+      <div>
+        <div class="name">Cascading Style Sheets</div>
+        <div class="issuer"><a href="https://www.hackerrank.com/home" target="_blank" rel="noopener">HackerRank</a></div>
+      </div>
+      <div class="right">
+        <div class="date">Oct 2024</div>
+        <a class="cert-link" href="https://drive.google.com/file/d/1tbDIf0ZY2aT6oIuPjP3y0Pqh7zJb_L5v/view?usp=sharing" target="_blank" rel="noopener">View certificate</a>
+      </div>
+    </div>
+    <div class="cert-row">
+      <div>
+        <div class="name">Effective Time Management</div>
+        <div class="issuer"><a href="https://mastersunion.org/" target="_blank" rel="noopener">Master Union</a></div>
+      </div>
+      <div class="right">
+        <div class="date">Oct 2024</div>
+        <a class="cert-link" href="https://drive.google.com/file/d/1YMGWuVBshy0xNz4pxfzxEOf27koZ71xt/view?usp=sharing" target="_blank" rel="noopener">View certificate</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+
+    <div class="edu-row">
+      <div class="edu-top">
+        <span class="school">Lovely Professional University</span>
+        <span class="loc">Phagwara, Punjab</span>
+      </div>
+      <div class="edu-bottom">
+        <span>B.Tech, Computer Science &amp; Engineering — CGPA 7.06</span>
+        <span class="when">Aug 2024 – Present</span>
+      </div>
+    </div>
+
+    <div class="edu-row">
+      <div class="edu-top">
+        <span class="school">R. N. Sr. Sec. School</span>
+        <span class="loc">Jamalpur, Haryana</span>
+      </div>
+      <div class="edu-bottom">
+        <span>Intermediate (12th) — 78.6%</span>
+        <span class="when">May 2023 – Mar 2024</span>
+      </div>
+    </div>
+
+    <div class="edu-row">
+      <div class="edu-top">
+        <span class="school">Saraswati Sr. Sec. School</span>
+        <span class="loc">Baslambi, Haryana</span>
+      </div>
+      <div class="edu-bottom">
+        <span>Matriculation (10th) — 79.4%</span>
+        <span class="when">May 2021 – Mar 2022</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="section-title">Contact</h2>
+    <p class="lead">Open to full-stack developer internships — happy to share more about any of the projects above.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="label">Email</span>
+        <span class="val"><a href="mailto:harahyadav01@gmail.com">harahyadav01@gmail.com</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="label">Phone</span>
+        <span class="val">+91 7015937702</span>
+      </div>
+      <div class="contact-item">
+        <span class="label">GitHub</span>
+        <span class="val"><a href="https://github.com/MrHarsh-tech" target="_blank" rel="noopener">MrHarsh-tech</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="label">LinkedIn</span>
+        <span class="val"><a href="https://www.linkedin.com/in/harsh-yadav18/" target="_blank" rel="noopener">harsh-yadav18</a></span>
+      </div>
+    </div>
+    <p class="foot-note">Built by Harsh Yadav.</p>
+  </div>
+</footer>
+
+</body>
+</html>
