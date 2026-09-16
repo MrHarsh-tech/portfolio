@@ -275,8 +275,8 @@ img { max-width: 100%; display: block; }
 
 /* Hero stats */
 .hero-stats {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  max-width: 520px;
+  display: grid; grid-template-columns: 1fr; gap: 16px;
+  max-width: 260px;
   animation: fadeInUp 0.8s ease-out 0.55s both;
 }
 .hero-stat {
@@ -650,13 +650,103 @@ section { position: relative; z-index: 1; padding: 100px 0; }
   background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(99,102,241,0.08), transparent);
 }
 .contact-inner { position: relative; z-index: 2; }
-.contact-lead {
-  color: var(--text-secondary); font-size: 17px;
-  max-width: 520px; margin-bottom: 40px; line-height: 1.7;
+.contact-heading {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  text-align: center;
+  background: var(--gradient-2);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
 }
+.contact-subtitle {
+  text-align: center;
+  color: var(--text-secondary); font-size: 17px;
+  max-width: 520px; margin: 0 auto 48px; line-height: 1.7;
+}
+
+/* Contact form card */
+.contact-form-card {
+  max-width: 700px; margin: 0 auto;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  position: relative; overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+.contact-form-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient-2);
+}
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  margin-bottom: 20px;
+}
+.form-group {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-bottom: 0;
+}
+.form-group.full { grid-column: 1 / -1; margin-bottom: 0; }
+.form-group label {
+  font-size: 13.5px; font-weight: 600; color: var(--text-primary);
+}
+.form-input-wrapper {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  transition: all var(--transition);
+}
+.form-input-wrapper:focus-within {
+  border-color: var(--accent);
+  background: rgba(99,102,241,0.05);
+  box-shadow: 0 0 20px rgba(99,102,241,0.1);
+}
+.form-input-wrapper .form-icon {
+  color: var(--text-muted); flex-shrink: 0;
+  width: 18px; height: 18px;
+}
+.form-input-wrapper input,
+.form-input-wrapper textarea {
+  background: none; border: none; outline: none;
+  color: var(--text-primary); font-family: 'Inter', sans-serif;
+  font-size: 15px; width: 100%; line-height: 1.5;
+}
+.form-input-wrapper input::placeholder,
+.form-input-wrapper textarea::placeholder {
+  color: var(--text-muted);
+}
+.form-input-wrapper textarea {
+  resize: vertical; min-height: 100px;
+}
+.form-submit {
+  width: 100%; margin-top: 24px;
+  padding: 16px 24px; border: none; border-radius: var(--radius-sm);
+  background: var(--gradient-2);
+  color: #fff; font-family: 'Inter', sans-serif;
+  font-size: 16px; font-weight: 700;
+  cursor: pointer; transition: all var(--transition);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  position: relative; overflow: hidden;
+}
+.form-submit::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0; transition: opacity var(--transition);
+}
+.form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(99,102,241,0.3);
+}
+.form-submit:hover::before { opacity: 1; }
+
+/* Contact info cards below form */
 .contact-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px; margin-bottom: 60px;
+  gap: 16px; margin-top: 40px; max-width: 700px; margin-left: auto; margin-right: auto;
 }
 .contact-card {
   background: var(--bg-glass); border: 1px solid var(--border-glass);
@@ -748,6 +838,8 @@ section { position: relative; z-index: 1; padding: 100px 0; }
   .cert-right { text-align: left; align-items: flex-start; }
   section { padding: 60px 0; }
   .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact-form-card { padding: 28px 20px; }
   .terminal-prompt { font-size: 12px; padding: 10px 14px; }
   .scroll-top { bottom: 20px; right: 20px; }
 }
@@ -772,14 +864,18 @@ section { position: relative; z-index: 1; padding: 100px 0; }
 <!-- ===== NAVBAR ===== -->
 <header class="navbar" id="navbar">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">HY.</a>
+    <a href="#" class="nav-logo">&lt;Harsh/&gt;</a>
     <nav class="nav-links" id="navLinks">
+      <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
+      <a href="#certifications">Certifications</a>
       <a href="#education">Education</a>
-      <a href="#contact" class="nav-cta">Let's Talk</a>
+      <a href="#contact">Contact</a>
+      <a href="https://drive.google.com/file/d/1uO9wxxoNVdptWgPQ-E013AQPg7Qh-kQ1/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+      <a href="#contact" class="nav-cta">🚀 Let's Talk</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -809,20 +905,6 @@ section { position: relative; z-index: 1; padding: 100px 0; }
         <span class="path">~/harsh</span>
         <span class="cmd">shipping features, end to end</span>
         <span class="cursor-blink"></span>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="stat-label">Degree</div>
-          <div class="stat-value">B.Tech, CSE</div>
-        </div>
-        <div class="hero-stat">
-          <div class="stat-label">CGPA</div>
-          <div class="stat-value">7.06</div>
-        </div>
-        <div class="hero-stat">
-          <div class="stat-label">University</div>
-          <div class="stat-value">LPU</div>
-        </div>
       </div>
     </div>
     <div class="hero-photo-wrapper">
@@ -1054,11 +1136,19 @@ section { position: relative; z-index: 1; padding: 100px 0; }
     </div>
     <div class="exp-card reveal">
       <div class="exp-top">
+        <h3>Full-Stack Web Development — Virtual Internship</h3>
+        <span class="exp-date">Sep 2026 – Present</span>
+      </div>
+      <span class="exp-org">CodSoft</span>
+      <p>Built three full-stack web applications with Next.js (App Router), Prisma ORM, NextAuth.js, Zod, and Tailwind CSS: <strong>JobConnect</strong> (job portal with role-based candidate/recruiter workflows and application-pipeline tracking), a restaurant ordering and table-management platform (with live order tracking and automated table-status sync), and <strong>EduManage</strong> (school ERP with role-based dashboards for admins, teachers, and students). Designed relational database schemas and role-based authentication/authorization for each application, shipping all three to production build with zero compilation errors.</p>
+    </div>
+    <div class="exp-card reveal" style="margin-top: 24px;">
+      <div class="exp-top">
         <h3>CyberSmart Awareness CSR — Internship</h3>
         <span class="exp-date">Jul 2025 – Aug 2025</span>
       </div>
       <span class="exp-org">WNS Cares Foundation</span>
-      <p>Trained 40 community members across five WNS Cybersmart modules — social media safety, cyberbullying, financial security, public internet safety, and cyber grooming — through in-person sessions with live Q&A and hands-on demos of password security, two-factor authentication, and phishing detection. Outcomes were documented through geo-tagged field photos and an Excel-based certification log for CSR reporting.</p>
+      <p>Trained 40+ community members across five WNS Cybersmart modules — social media safety, cyberbullying, financial security, public internet safety, and cyber grooming — through in-person sessions with live Q&A and hands-on demos of password security, two-factor authentication, and phishing detection. Outcomes were documented through geo-tagged field photos and an Excel-based certification log for CSR reporting.</p>
     </div>
   </div>
 </section>
@@ -1176,11 +1266,43 @@ section { position: relative; z-index: 1; padding: 100px 0; }
 <!-- ===== CONTACT / FOOTER ===== -->
 <footer class="contact-section" id="contact">
   <div class="container contact-inner">
-    <div class="section-header reveal">
-      <div class="section-label">Get In Touch</div>
-      <h2 class="section-title">Let's Work Together</h2>
-    </div>
-    <p class="contact-lead reveal">Open to full-stack developer internships — happy to share more about any of the projects above. Let's connect!</p>
+    <h2 class="contact-heading reveal">Get In Touch</h2>
+    <p class="contact-subtitle reveal">Have a project in mind or just want to say hi? My inbox is always open.</p>
+
+    <form class="contact-form-card reveal" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Your Name</label>
+          <div class="form-input-wrapper">
+            <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" id="cf-name" name="name" placeholder="Harsh Yadav" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email Address</label>
+          <div class="form-input-wrapper">
+            <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <input type="email" id="cf-email" name="email" placeholder="hello@example.com" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="cf-subject">Subject</label>
+        <div class="form-input-wrapper">
+          <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          <input type="text" id="cf-subject" name="subject" placeholder="Project Inquiry">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Your Message</label>
+        <div class="form-input-wrapper" style="align-items: flex-start;">
+          <svg class="form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top: 2px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <textarea id="cf-message" name="message" placeholder="Tell me about your project..." required></textarea>
+        </div>
+      </div>
+      <button type="submit" class="form-submit">Send Message ✈</button>
+    </form>
+
     <div class="contact-grid reveal">
       <div class="contact-card">
         <span class="cc-label">Email</span>
@@ -1202,7 +1324,7 @@ section { position: relative; z-index: 1; padding: 100px 0; }
   </div>
   <div class="footer-bar">
     <div class="container">
-      <p>Designed & built by Harsh Yadav with <span class="heart">♥</span></p>
+      <p>Designed &amp; built by Harsh Yadav with <span class="heart">♥</span></p>
     </div>
   </div>
 </footer>
